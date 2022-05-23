@@ -106,4 +106,9 @@ def solve_eqa(eqa, symbols):
 
         return(answer)
 
+        print(adder)
+        print(div)
+        print(multi)
+        print(equal)
+
 print(solve_eqa(eqa, symbols))
