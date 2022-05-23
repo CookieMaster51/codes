@@ -10,6 +10,7 @@ def solve_eqa(eqa, symbols):
     multi_bool = False
     pm_bool = False
     div_bool = False
+    multi_neg = False
 
     # making useful things
 
@@ -41,31 +42,6 @@ def solve_eqa(eqa, symbols):
         var = var[0]
         place = eqa.find(var)
 
-        # finds the multiplier
-        if place != 0:
-            if eqa[place - 1] != " ":
-                multi = eqa[place - 1]
-                multi_bool = True
-                multi = int(multi)
-
-                if eqa[0] == "-":
-                    multi = - multi
-
-        # finds the divisor
-        if eqa[place + 1] != " ":
-            if eqa[place + 2] == "-":
-                div = eqa[place + 3]
-            else:
-                div = eqa[place + 2]
-
-            div_bool = True
-
-            div = int(div)
-
-            if eqa[place + 2] == "-":
-                div = -div
-
-
         # finds the adder
         if not eqa.find("+") < 1:
             pm_pos = eqa.find("+")
@@ -81,6 +57,47 @@ def solve_eqa(eqa, symbols):
             adder = adder.replace(" ", "")
             adder = int(adder)
 
+        # finds the multiplier
+        if place != 0:
+                if eqa[0] == "-":
+                    multi_neg = True
+
+                if multi_neg:
+                    multi = eqa[1:place]
+                    multi = int(multi)
+                    multi = -multi
+                    
+                else:
+                    multi = eqa[:place]
+                    multi = int(multi)
+
+                multi_bool = True
+
+
+
+
+        # finds the divisor
+        # FIX THIS ASAP   
+
+        if eqa[place + 1] != " ":
+            if eqa[place + 2] == "-":
+                if pm_bool:
+                    div = eqa[place + 3:pm_pos - 1]
+                else:
+                    div = eqa[place + 3:eqa.find("=") - 1]
+
+                div = int(div)
+                div = -div
+                
+            else:
+                if pm_bool:
+                    div = eqa[place + 2:pm_pos - 1]
+                else:
+                    div = eqa[place + 2:eqa.find("=") - 1]
+
+                div = int(div)
+
+            div_bool = True
         
         # finds the post = number
 
