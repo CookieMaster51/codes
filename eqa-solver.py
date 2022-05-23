@@ -2,7 +2,7 @@ symbols = ["=", "+", "-", "/", " "]
 
 
 # ask for the equasion
-print("please format as 'ax/b + c = d'")
+print("please format as 'ax/b + c = d', no decimals or fractions of numbers for a b c and d please")
 eqa = input("What is the equasion?\n")
 
 def solve_eqa(eqa, symbols):
@@ -34,7 +34,7 @@ def solve_eqa(eqa, symbols):
         # makes sure its not a simult eqa or some line or somethin
         print("Please only put ONE variable in your equasion")
     elif "." in char:
-        #gets rid of floats
+        # gets rid of floats
         print("No decimals or fractions please, i dont know how to do them!")    
     else:
         # finds location of the unknown
