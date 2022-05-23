@@ -1,4 +1,5 @@
-#THIS IS NOT MY CODEEEE CHECK OUT https://towardsdatascience.com/face-detection-in-2-minutes-using-opencv-python-90f89d7c0f81
+# THIS IS NOT MY CODEEEE CHECK OUT https://towardsdatascience.com/face-detection-in-2-minutes-using-opencv-python-90f89d7c0f81
+# requires opencv-python to work
 
 """
 import numpy as np
