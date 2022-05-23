@@ -106,7 +106,4 @@ def solve_eqa(eqa, symbols):
 
         return(answer)
 
-def form():
-    print("please put the equasion in form ax/b +- c = d")
-
 print(solve_eqa(eqa, symbols))
