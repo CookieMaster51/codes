@@ -2,7 +2,7 @@ symbols = ["=", "+", "-", "/", " "]
 
 
 # ask for the equasion
-print("please format as 'ax/b + c = d', no decimals or fractions of numbers for a b c and d please")
+print("please format as 'ax/b + c = d', make a, b, c and d as integers")
 eqa = input("What is the equasion?\n")
 
 def solve_eqa(eqa, symbols):
