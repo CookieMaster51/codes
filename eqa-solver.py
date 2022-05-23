@@ -33,7 +33,7 @@ def solve_eqa(eqa, symbols):
     if len(var) > 1:
         # makes sure its not a simult eqa or some line or somethin
         print("Please only put ONE variable in your equasion")
-    elif "." in char:
+    elif "." in var:
         # gets rid of floats
         print("No decimals or fractions please, i dont know how to do them!")    
     else:
