@@ -89,8 +89,7 @@ def solve_eqa(eqa, symbols):
 
 
 
-        # finds the divisor
-        # FIX THIS ASAP   
+        # finds the divisor   
 
         if eqa[place + 1] != " ":
             if eqa[place + 2] == "-":
