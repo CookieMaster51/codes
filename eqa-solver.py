@@ -1,4 +1,8 @@
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This is my code, don't steal it please
+# Any issues or bugs please raise them via GitHub
+# Thank you for using this!
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ask for the equasion
 print("please format as 'ax/b + c = d', make a, b, c and d integers")
