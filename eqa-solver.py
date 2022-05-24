@@ -47,34 +47,6 @@ def solve_eqa(eqa):
         var = var[0]
         place = eqa.find(var)
 
-        # finds the adder
-        if not eqa.find("+") < 1:
-            pm_pos = eqa.find("+")
-            pm_bool = True
-        # Spaghitti code time!
-        else:
-            if not eqa.find("-") < 1:
-                if eqa.find("/") == -1: # makes sure there is not a division
-                    pm_pos = eqa.find("-")
-                    pm_bool = True
-                else:
-                    if eqa[eqa.find("/") + 1] != "-": # checks if the divisor is negative
-                        pm_pos = eqa.find("-")
-                        pm_bool = True 
-                    else: 
-                        eqa_post_div = eqa[eqa.find("/") + 2:] # gets rid of the "fake" negative
-                        if eqa_post_div.find("-") > 0:
-                            fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
-                            pre_div_len = len(eqa) - len(eqa_post_div) 
-                            pm_pos = fake_pm_pos + pre_div_len # translates the place in the "fake" eqa to the real one
-                            pm_bool = True
-
-        if pm_bool:
-            adder = eqa[pm_pos:]
-            adder = adder[:adder.find("=")]
-            adder = adder.replace(" ", "")
-            adder = int(adder)
-
         # finds the multiplier
         if place != 0:
                 if eqa[0] == "-":
@@ -90,6 +62,62 @@ def solve_eqa(eqa):
                     multi = int(multi)
 
                 multi_bool = True
+
+        # finds the adder
+        if not eqa.find("+") < 1:
+            pm_pos = eqa.find("+")
+            pm_bool = True
+            
+        # Spaghitti code time!
+        else:
+            if not multi_neg:
+                if not eqa.find("-") < 1:
+                    
+                    if eqa.find("/") == -1: # makes sure there is not a division
+                        pm_pos = eqa.find("-")
+                        pm_bool = True
+                    else:
+                        if eqa[eqa.find("/") + 1] != "-": # checks if the divisor is negative
+                            pm_pos = eqa.find("-")
+                            pm_bool = True 
+                            
+                        else: 
+                            eqa_post_div = eqa[eqa.find("/") + 2:] # gets rid of the "fake" negative
+                            if eqa_post_div.find("-") > 0:
+                                fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
+                                pre_div_len = len(eqa) - len(eqa_post_div) 
+                                pm_pos = fake_pm_pos + pre_div_len # translates the place in the "fake" eqa to the real one
+                                pm_bool = True
+            else:
+                
+                eqa_sub_multi = eqa[1:]
+                if not eqa_sub_multi.find("-") < 1:
+                    
+                    if eqa_sub_multi.find("/") == -1: # makes sure there is not a division
+                        pm_pos = eqa_sub_multi.find("-")
+                        pm_bool = True
+                        
+                    else:
+                        if eqa_sub_multi[eqa_sub_multi.find("/") + 1] != "-": # checks if the divisor is negative
+                            pm_pos = eqa_sub_multi.find("-")
+                            pm_bool = True 
+                            
+                        else: 
+                            eqa_post_div = eqa_sub_multi[eqa_sub_multi.find("/") + 2:] # gets rid of the "fake" negative
+                            if eqa_post_div.find("-") > 0:
+                                fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
+                                pre_div_len = len(eqa_sub_multi) - len(eqa_post_div) 
+                                pm_pos = fake_pm_pos + pre_div_len + 1# translates the place in the "fake" eqa to the real one
+                                pm_bool = True
+                                
+
+        if pm_bool:
+            adder = eqa[pm_pos:]
+            adder = adder[:adder.find("=")]
+            adder = adder.replace(" ", "")
+            adder = int(adder)
+
+
 
 
 
