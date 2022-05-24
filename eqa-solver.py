@@ -111,7 +111,6 @@ def solve_eqa(eqa, symbols):
                 div = int(div)
 
             div_bool = True
-            print(div)
         
         # finds the post = number
 
