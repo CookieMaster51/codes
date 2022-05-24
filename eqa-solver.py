@@ -61,8 +61,7 @@ def solve_eqa(eqa):
                     if eqa[eqa.find("/") + 1] != "-": # checks if the divisor is negative
                         pm_pos = eqa.find("-")
                         pm_bool = True 
-                    else:
-                        
+                    else: 
                         eqa_post_div = eqa[eqa.find("/") + 2:] # gets rid of the "fake" negative
                         if eqa_post_div.find("-") > 0:
                             fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
