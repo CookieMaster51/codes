@@ -42,7 +42,10 @@ def solve_eqa(eqa):
         return("Please only put ONE variable in your equasion")
     elif "." in var:
         # gets rid of floats
-        return("No decimals or fractions please, i dont know how to do them!")    
+        return("No decimals or fractions please, i dont know how to do them!")
+    elif len(var) == 0:
+        # Why would you not put in a variable?
+        return("Please put a variable in it")    
     else:
         # finds location of the unknown
         var = var[0]
