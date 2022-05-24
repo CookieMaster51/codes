@@ -64,9 +64,7 @@ def solve_eqa(eqa):
                     else:
                         
                         eqa_post_div = eqa[eqa.find("/") + 2:] # gets rid of the "fake" negative
-                        print(eqa_post_div)
                         if eqa_post_div.find("-") > 0:
-                            print("debug")
                             fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
                             pre_div_len = len(eqa) - len(eqa_post_div) 
                             pm_pos = fake_pm_pos + pre_div_len # translates the place in the "fake" eqa to the real one
