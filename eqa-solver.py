@@ -3,6 +3,7 @@
 # Any issues or bugs please raise them via GitHub                  #
 # Thank you for using this!                                        #
 # Warning, it always outputs a float                               #
+# DO NOT USE FRACTIONS OR DECIMALS WHOLE NUMBERS ONLY              #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # ask for the equasion
