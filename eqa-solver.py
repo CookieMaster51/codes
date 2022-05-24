@@ -1,9 +1,9 @@
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-# This is my code, don't steal it please; credit me! #
-# Any issues or bugs please raise them via GitHub    #
-# Thank you for using this!                          #
-# Warning, it always outputs a float                 #
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# This is my code, don't steal it please; credit me!               #
+# Any issues or bugs please raise them via GitHub                  #
+# Thank you for using this!                                        #
+# Warning, it always outputs a float                               #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # ask for the equasion
 print("please format as 'ax/b + c = d', make a, b, c and d integers")
