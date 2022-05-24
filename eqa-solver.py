@@ -88,7 +88,7 @@ def solve_eqa(eqa):
                                 pre_div_len = len(eqa) - len(eqa_post_div) 
                                 pm_pos = fake_pm_pos + pre_div_len # translates the place in the "fake" eqa to the real one
                                 pm_bool = True
-                                
+
             else:
                 eqa_sub_multi = eqa[1:]
                 if not eqa_sub_multi.find("-") < 1:
@@ -116,11 +116,6 @@ def solve_eqa(eqa):
             adder = adder[:adder.find("=")]
             adder = adder.replace(" ", "")
             adder = int(adder)
-
-
-
-
-
 
         # finds the divisor   
 
