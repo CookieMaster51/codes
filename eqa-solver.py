@@ -1,12 +1,12 @@
-symbols = ["=", "+", "-", "/", " "]
 
 
 # ask for the equasion
 print("please format as 'ax/b + c = d', make a, b, c and d as integers")
 eqa = input("What is the equasion?\n")
 
-def solve_eqa(eqa, symbols):
+def solve_eqa(eqa):
 
+    symbols = ["=", "+", "-", "/", " "]
     multi_bool = False
     pm_bool = False
     div_bool = False
@@ -137,4 +137,4 @@ def solve_eqa(eqa, symbols):
         return(answer)
 
 
-print(solve_eqa(eqa, symbols))
+print(solve_eqa(eqa))
