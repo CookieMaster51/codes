@@ -137,9 +137,6 @@ def solve_eqa(eqa):
 
         answer = equal
 
-        if is_int(answer):
-            answer = int(answer)
-
         return(answer)
 
 
