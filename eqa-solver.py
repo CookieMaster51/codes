@@ -46,10 +46,23 @@ def solve_eqa(eqa, symbols):
         if not eqa.find("+") < 1:
             pm_pos = eqa.find("+")
             pm_bool = True
-        else:    
+        # Spaghitti code time!
+        else:
             if not eqa.find("-") < 1:
-                pm_pos = eqa.find("-")
-                pm_bool = True
+                if eqa.find("/") == -1: # makes sure there is not a division
+                    pm_pos = eqa.find("-")
+                    pm_bool = True
+                else:
+                    if eqa[eqa.find("/") + 1] != "-": # checks if the divisor is negative
+                        pm_pos = eqa.find("-")
+                        pm_bool = True 
+                    else:
+                        eqa_post_div = eqa[eqa.find("/") + 1:] # gets rid of the "fake" negative
+                        if eqa_post_div.find("-"):
+                            fake_pm_pos = eqa_post_div.find("-") # finds the negative in the "fake" eqa
+                            pre_div_len = len(eqa) - len(eqa_post_div) 
+                            pm_pos = fake_pm_pos + pre_div_len # translates the place in the "fake" eqa to the real one
+                            pm_bool = True
 
         if pm_bool:
             adder = eqa[pm_pos:]
@@ -84,9 +97,10 @@ def solve_eqa(eqa, symbols):
                 if pm_bool:
                     div = eqa[place + 3:pm_pos - 1]
                 else:
-                    div = eqa[place + 3:eqa.find("=") - 1]
+                    div = eqa[place + 3:eqa.find("=")]
 
                 div = int(div)
+                
                 div = -div
                 
             else:
@@ -98,6 +112,7 @@ def solve_eqa(eqa, symbols):
                 div = int(div)
 
             div_bool = True
+            print(div)
         
         # finds the post = number
 
