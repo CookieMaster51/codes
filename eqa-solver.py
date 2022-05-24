@@ -1,7 +1,7 @@
 
 
 # ask for the equasion
-print("please format as 'ax/b + c = d', make a, b, c and d as integers")
+print("please format as 'ax/b + c = d', make a, b, c and d integers")
 eqa = input("What is the equasion?\n")
 
 def solve_eqa(eqa):
