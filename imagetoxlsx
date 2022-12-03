@@ -1,0 +1,66 @@
+import PIL.Image
+import xlsxwriter as xls
+
+filename = "image.png"
+
+workbook = xls.Workbook('hello.xlsx')
+worksheet = workbook.add_worksheet()
+
+red_col = {
+'type': '2_color_scale',
+'min_type': 'num',
+"max_type": "num",
+"min_value": 0,
+"max_value": 255,
+"min_color": "#000000",
+"max_color": "#FF0000"
+}
+green_col = {
+'type': '2_color_scale',
+'min_type': 'num',
+"max_type": "num",
+"min_value": 0,
+"max_value": 255,
+"min_color": "#000000",
+"max_color": "#00FF00"
+}
+blue_col = {
+'type': '2_color_scale',
+'min_type': 'num',
+"max_type": "num",
+"min_value": 0,
+"max_value": 255,
+"min_color": "#000000",
+"max_color": "#0000FF"
+}
+
+
+alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+col = alphabet
+
+for i in range(26):
+    for j in range(26):
+        col.append(f"{alphabet[i]}{alphabet[j]}")
+
+for i in range(26):
+    for j in range(26):
+        for k in range(26):
+            col.append(f"{alphabet[i]}{alphabet[j]}{alphabet[k]}")
+
+
+with PIL.Image.open(filename) as pic:
+    for x_pos in range(pic.width):
+        for y_pos in range(pic.height):
+            pixel_rgb = pic.getpixel((x_pos, y_pos))
+            red, green, blue = pixel_rgb[0], pixel_rgb[1], pixel_rgb[2] 
+
+            worksheet.write(f"{col[x_pos]}{y_pos*3 + 1}", red)
+            worksheet.write(f"{col[x_pos]}{y_pos*3 + 2}", green)
+            worksheet.write(f"{col[x_pos]}{y_pos*3 + 3}", blue)
+            
+    for row in range(pic.height):
+        worksheet.conditional_format(f'A{row*3 + 1}:{col[pic.width]}{row*3 + 1}', red_col)
+        worksheet.conditional_format(f'A{row*3 + 2}:{col[pic.width]}{row*3 + 1}', green_col)
+        worksheet.conditional_format(f'A{row*3 + 3}:{col[pic.width]}{row*3 + 1}', blue_col)
+
+workbook.close()
