@@ -1,11 +1,14 @@
 import PIL.Image
 import xlsxwriter as xls
 
+# Put the name of the file you want to excel here
 filename = "image.png"
 
+# Making a new excel doc
 workbook = xls.Workbook('hello.xlsx')
 worksheet = workbook.add_worksheet()
 
+# Defining dictionaries for the conditional formating
 red_col = {
 'type': '2_color_scale',
 'min_type': 'num',
@@ -35,6 +38,7 @@ blue_col = {
 }
 
 
+# Making the column headings
 alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 col = alphabet
 
@@ -48,19 +52,27 @@ for i in range(26):
             col.append(f"{alphabet[i]}{alphabet[j]}{alphabet[k]}")
 
 
+# Opens the file
 with PIL.Image.open(filename) as pic:
+    # Loops through every column
     for x_pos in range(pic.width):
+        # Loops through every row
         for y_pos in range(pic.height):
+            # Gets the RGB value of that pixel as a tuple
             pixel_rgb = pic.getpixel((x_pos, y_pos))
             red, green, blue = pixel_rgb[0], pixel_rgb[1], pixel_rgb[2] 
-
+            
+            # Puts the vaules of each pixel into the cells in the spreadsheet
             worksheet.write(f"{col[x_pos]}{y_pos*3 + 1}", red)
             worksheet.write(f"{col[x_pos]}{y_pos*3 + 2}", green)
             worksheet.write(f"{col[x_pos]}{y_pos*3 + 3}", blue)
             
+    # Loops through every row
     for row in range(pic.height):
+        # Applies conditional formatting to every row
         worksheet.conditional_format(f'A{row*3 + 1}:{col[pic.width]}{row*3 + 1}', red_col)
         worksheet.conditional_format(f'A{row*3 + 2}:{col[pic.width]}{row*3 + 1}', green_col)
         worksheet.conditional_format(f'A{row*3 + 3}:{col[pic.width]}{row*3 + 1}', blue_col)
 
+# Closes the excel doc
 workbook.close()
