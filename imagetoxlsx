@@ -1,5 +1,7 @@
-import PIL.Image
-import xlsxwriter as xls
+# Made by CookieMaster51 on github :)
+
+import PIL.Image # pip install pillow
+import xlsxwriter as xls # pip install xlsxwriter
 
 # Put the name of the file you want to excel here
 filename = "image.png"
