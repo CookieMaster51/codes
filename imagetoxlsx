@@ -1,13 +1,36 @@
-# Made by CookieMaster51 on github :)
+# Made by CookieMaster51 on github :) 
+# <3 if ur reading this
 
+import requests
 import PIL.Image # pip install pillow
-import xlsxwriter as xls # pip install xlsxwriter
+import xlsxwriter # pip install xlsxwriter
+import os
 
-# Put the name of the file you want to excel here
-filename = "image.png"
+print("When the image opens scroll out and down!")
+
+# Var to ask if we should open the file at the end
+do_open = True
+
+# Just gets the image from the URL
+valid = False
+while not valid:
+    image_url = input("Please enter a image URL to excelify!\n")
+
+    try:
+        img_data = requests.get(image_url).content
+        valid = True
+    except requests.exceptions.MissingSchema:
+        print("That is not a vaild image URL please try again!")
+
+filename = "tempimg.jpg"
+
+with open(filename, 'wb') as handler:
+    handler.write(img_data)
 
 # Making a new excel doc
-workbook = xls.Workbook('hello.xlsx')
+
+
+workbook = xlsxwriter.Workbook('image.xlsx')
 worksheet = workbook.add_worksheet()
 
 # Defining dictionaries for the conditional formating
@@ -53,28 +76,53 @@ for i in range(26):
         for k in range(26):
             col.append(f"{alphabet[i]}{alphabet[j]}{alphabet[k]}")
 
-
 # Opens the file
-with PIL.Image.open(filename) as pic:
-    # Loops through every column
-    for x_pos in range(pic.width):
-        # Loops through every row
-        for y_pos in range(pic.height):
-            # Gets the RGB value of that pixel as a tuple
-            pixel_rgb = pic.getpixel((x_pos, y_pos))
-            red, green, blue = pixel_rgb[0], pixel_rgb[1], pixel_rgb[2] 
-            
-            # Puts the vaules of each pixel into the cells in the spreadsheet
-            worksheet.write(f"{col[x_pos]}{y_pos*3 + 1}", red)
-            worksheet.write(f"{col[x_pos]}{y_pos*3 + 2}", green)
-            worksheet.write(f"{col[x_pos]}{y_pos*3 + 3}", blue)
-            
-    # Loops through every row
-    for row in range(pic.height):
-        # Applies conditional formatting to every row
-        worksheet.conditional_format(f'A{row*3 + 1}:{col[pic.width]}{row*3 + 1}', red_col)
-        worksheet.conditional_format(f'A{row*3 + 2}:{col[pic.width]}{row*3 + 1}', green_col)
-        worksheet.conditional_format(f'A{row*3 + 3}:{col[pic.width]}{row*3 + 1}', blue_col)
+if do_open:
+    try:
+        with PIL.Image.open(filename) as pic:
+            height_ratio = pic.height/pic.width
+            # Makes the image a certain size
+            pic_resized = pic.resize((220, int(220 * height_ratio)))
+            pic_resized = pic_resized.save(filename)
 
-# Closes the excel doc
-workbook.close()
+    except PIL.UnidentifiedImageError:
+        print("The URL you inputed is not an image! make sure that you rightclick and select 'open image in new tab'")
+        do_open = False
+
+if do_open:
+    with PIL.Image.open(filename) as pic:
+        # Loops through every column
+        for x_pos in range(pic.width):
+            # Loops through every row
+            for y_pos in range(pic.height):
+                # Gets the RGB value of that pixel as a tuple
+                pixel_rgb = pic.getpixel((x_pos, y_pos))
+                red, green, blue = pixel_rgb[0], pixel_rgb[1], pixel_rgb[2] 
+                
+                # Puts the vaules of each pixel into the cells in the spreadsheet
+                worksheet.write(f"{col[x_pos]}{y_pos*3 + 1}", red)
+                worksheet.write(f"{col[x_pos]}{y_pos*3 + 2}", green)
+                worksheet.write(f"{col[x_pos]}{y_pos*3 + 3}", blue)
+
+                
+        # Loops through every row
+        for row in range(pic.height):
+            # Applies conditional formatting to every row
+            worksheet.conditional_format(f'A{row*3 + 1}:{col[pic.width]}{row*3 + 1}', red_col)
+            worksheet.conditional_format(f'A{row*3 + 2}:{col[pic.width]}{row*3 + 1}', green_col)
+            worksheet.conditional_format(f'A{row*3 + 3}:{col[pic.width]}{row*3 + 1}', blue_col)
+
+    # Closes the excel doc
+    try:
+        workbook.close()
+    except:
+        print("Close the excel file and try again")
+
+# Gets rid of the temporary img file
+os.remove("tempimg.jpg")
+
+# Opens the file if we should open it
+directory = os.getcwd()
+
+if do_open:
+    os.system("image.xlsx")
