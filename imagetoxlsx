@@ -6,7 +6,7 @@ import PIL.Image # pip install pillow
 import xlsxwriter # pip install xlsxwriter
 import os
 
-
+IMAGE_FOLDER_NAME = "images"
 
 # Var to ask if we should open the file at the end
 do_open = True
@@ -64,7 +64,7 @@ else:
     try:
         want = int(input("\nWhat is the number that you would like to excelify?   "))
 
-        filename = "images\\" + all_imgs[want]
+        filename = IMAGE_FOLDER_NAME + "\\" + all_imgs[want]
     except:
         print("That is not a vaild choice!")
         do_open = False
