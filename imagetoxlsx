@@ -6,26 +6,69 @@ import PIL.Image # pip install pillow
 import xlsxwriter # pip install xlsxwriter
 import os
 
-print("When the image opens scroll out and down!")
+
 
 # Var to ask if we should open the file at the end
 do_open = True
 
-# Just gets the image from the URL
-valid = False
-while not valid:
-    image_url = input("Please enter a image URL to excelify!\n")
-
-    try:
-        img_data = requests.get(image_url).content
-        valid = True
-    except requests.exceptions.MissingSchema:
-        print("That is not a vaild image URL please try again!")
-
+# Name of the temporary img file
 filename = "tempimg.jpg"
 
-with open(filename, 'wb') as handler:
-    handler.write(img_data)
+print("""  _____ __  __  _____    _______ ____       ________   _______ ______ _      
+ |_   _|  \/  |/ ____|  |__   __/ __ \     |  ____\ \ / / ____|  ____| |     
+   | | | \  / | |  __      | | | |  | |    | |__   \ V / |    | |__  | |     
+   | | | |\/| | | |_ |     | | | |  | |    |  __|   > <| |    |  __| | |     
+  _| |_| |  | | |__| |     | | | |__| |    | |____ / . \ |____| |____| |____ 
+ |_____|_|  |_|\_____|     |_|  \____/     |______/_/ \_\_____|______|______|
+""")
+# Asks the user a thing
+chose = False
+while not chose:
+    url_or_file = input("Would you like to input the image as a URL or as a file? Type U or F:    ")
+    if url_or_file != "U" and url_or_file != "F":
+        print("That is not U or F, Try again")
+    else:
+        chose = True
+
+do_url = True if url_or_file == "U" else False
+
+
+
+# Just gets the image from the URL
+if do_url:
+    valid = False
+    while not valid:
+        image_url = input("Please enter a image URL to excelify!\n")
+
+        try:
+            img_data = requests.get(image_url).content
+            valid = True
+        except requests.exceptions.MissingSchema:
+            print("That is not a vaild image URL please try again!")
+
+    with open(filename, 'wb') as handler:
+        handler.write(img_data)
+
+# If the user wants from a file
+
+else:
+    path = os.getcwd()
+    path += "\\images"
+
+    print("Here are all the images:")
+    print("==========================")
+    all_imgs = os.listdir(path)
+    for i in range(0, len(all_imgs)):
+        print(f"{i}: {all_imgs[i]}")
+
+    try:
+        want = int(input("\nWhat is the number that you would like to excelify?   "))
+
+        filename = "images\\" + all_imgs[want]
+    except:
+        print("That is not a vaild choice!")
+        do_open = False
+
 
 # Making a new excel doc
 
@@ -118,8 +161,9 @@ if do_open:
     except:
         print("Close the excel file and try again")
 
-# Gets rid of the temporary img file
-os.remove("tempimg.jpg")
+# Gets rid of the temporary img file fi it was made
+if do_url:
+    os.remove("tempimg.jpg")
 
 # Opens the file if we should open it
 directory = os.getcwd()
